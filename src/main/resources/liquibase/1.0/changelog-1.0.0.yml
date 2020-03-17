@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - logicalFilePath: liquibase/1.0/changelog-1.0.0.yml
+  - changeSet:
+      id: created complaint_status table
+      author: Ali Huseynov
+      changes:
+        - createTable:
+            tableName: complaint_status
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
