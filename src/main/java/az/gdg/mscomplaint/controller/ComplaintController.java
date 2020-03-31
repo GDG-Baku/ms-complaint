@@ -65,11 +65,4 @@ public class ComplaintController {
         complaintService.deleteComplaint(id);
         logger.debug("Delete complaint of complaintId {} start", id);
     }
-
-    @PostMapping("/sendmail")
-    public void message(@RequestBody EmailDetails mail) {
-        Message<EmailDetails> msg = MessageBuilder.withPayload(mail).build();
-        this.email.send(msg);
-    }
-
 }
