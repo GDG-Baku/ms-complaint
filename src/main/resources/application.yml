@@ -15,3 +15,11 @@ spring:
   liquibase:
     change-log: classpath:liquibase/changelog-master.yml
     enabled: true
+  cloud:
+    stream:
+      bindings:
+        emailOutput:
+          destination: mails
+          group: mails-group
+server:
+  port: 8081

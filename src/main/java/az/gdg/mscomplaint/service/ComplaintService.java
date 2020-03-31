@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface ComplaintService {
 
-    public List<ComplaintDTO> getAllComplaints();
+    List<ComplaintDTO> getAllComplaints();
 
-    public void createComplaint(ComplaintRequest complaintRequest);
+    void createComplaint(ComplaintRequest complaintRequest);
 
-    public void updateComplaint(ComplaintDTO complaintDTO);
+    void updateComplaint(ComplaintDTO complaintDTO);
 
-    public void deleteComplaint(int id);
+    void deleteComplaint(int id);
 
 }

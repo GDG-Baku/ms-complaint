@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ComplaintMapper {
 
-    ComplaintMapper INSTANCE = Mappers.getMapper( ComplaintMapper.class );
+    ComplaintMapper INSTANCE = Mappers.getMapper(ComplaintMapper.class);
 
     @Mappings({
             @Mapping(target = "id", source = "id"),
@@ -25,7 +25,7 @@ public interface ComplaintMapper {
             @Mapping(target = "message", source = "message"),
             @Mapping(target = "statusId", source = "statusId.id"),
     })
-    public ComplaintDTO entityToDTO(ComplaintEntity complaintEntity);
+    ComplaintDTO entityToDTO(ComplaintEntity complaintEntity);
 
     @Mappings({
             @Mapping(target = "id", source = "id"),
@@ -37,7 +37,7 @@ public interface ComplaintMapper {
             @Mapping(target = "statusId", ignore = true),
             @Mapping(target = "typeId", ignore = true),
     })
-    public ComplaintEntity dtoToEntity(ComplaintDTO complaintDTO);
+    ComplaintEntity dtoToEntity(ComplaintDTO complaintDTO);
 
-    public List<ComplaintDTO> entityListToDtoList(List<ComplaintEntity> complaintEntity);
+    List<ComplaintDTO> entityListToDtoList(List<ComplaintEntity> complaintEntity);
 }
