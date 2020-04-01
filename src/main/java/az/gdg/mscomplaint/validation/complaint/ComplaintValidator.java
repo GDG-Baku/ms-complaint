@@ -44,7 +44,7 @@ public class ComplaintValidator implements
     }
 
     private boolean isEmailValid(String email, ConstraintValidatorContext context) {
-        if (email == null || !email.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")) {
+        if (email == null || !email.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?") || email.length() > 255) {
             checkViolationHelper.addViolation(context, "email", "Email is not valid");
             return false;
         }

@@ -33,7 +33,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: email
-                  type: varchar(30)
+                  type: varchar(254)
                   constraints:
                     nullable: false
               - column:
