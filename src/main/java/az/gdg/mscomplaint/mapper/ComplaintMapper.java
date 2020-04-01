@@ -1,7 +1,7 @@
 package az.gdg.mscomplaint.mapper;
 
 import az.gdg.mscomplaint.model.dto.ComplaintDTO;
-import az.gdg.mscomplaint.model.entity.ComplaintEntity;
+import az.gdg.mscomplaint.repository.entity.ComplaintEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

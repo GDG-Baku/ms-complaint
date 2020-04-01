@@ -15,5 +15,3 @@ spring:
   liquibase:
     change-log: classpath:liquibase/changelog-master.yml
     enabled: true
-server:
-  port: 8081

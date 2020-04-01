@@ -1,6 +1,6 @@
 package az.gdg.mscomplaint.repository;
 
-import az.gdg.mscomplaint.model.entity.ComplaintStatusEntity;
+import az.gdg.mscomplaint.repository.entity.ComplaintStatusEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package az.gdg.mscomplaint.model.entity;
+package az.gdg.mscomplaint.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

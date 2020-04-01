@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package az.gdg.mscomplaint.model.entity;
+package az.gdg.mscomplaint.repository.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,21 +16,21 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "complaint_status")
+@Table(name = "complaint_type")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComplaintStatusEntity {
+public class ComplaintTypeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "type")
+    private String type;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeId")
     private List<ComplaintEntity> complaintEntityList;
 }

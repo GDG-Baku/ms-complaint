@@ -4,10 +4,10 @@ import az.gdg.mscomplaint.exception.NotFoundException;
 import az.gdg.mscomplaint.mapper.ComplaintMapper;
 import az.gdg.mscomplaint.model.ComplaintRequest;
 import az.gdg.mscomplaint.model.dto.ComplaintDTO;
-import az.gdg.mscomplaint.model.entity.ComplaintEntity;
 import az.gdg.mscomplaint.repository.ComplaintRepository;
 import az.gdg.mscomplaint.repository.ComplaintStatusRepository;
 import az.gdg.mscomplaint.repository.ComplaintTypeRepository;
+import az.gdg.mscomplaint.repository.entity.ComplaintEntity;
 import az.gdg.mscomplaint.service.ComplaintService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,14 +44,14 @@ public class ComplaintServiceImpl implements ComplaintService {
         ComplaintEntity complaintEntity = new ComplaintEntity();
 
         complaintEntity.setTypeId(complaintTypeRepository.findById(
-                complaintRequest.getTypeId()).orElseThrow(() -> new NotFoundException("Not found type")));
+                complaintRequest.getTypeId()).orElseThrow(() -> new NotFoundException("Type is not found")));
         complaintEntity.setName(complaintRequest.getName());
         complaintEntity.setSurname(complaintRequest.getSurname());
         complaintEntity.setEmail(complaintRequest.getEmail());
         complaintEntity.setPhone(complaintRequest.getPhone());
         complaintEntity.setMessage(complaintRequest.getMessage());
         complaintEntity.setStatusId(complaintStatusRepository.findById(1).orElseThrow(()
-                -> new NotFoundException("Not found status")));
+                -> new NotFoundException("Status is not found")));
         complaintRepository.save(complaintEntity);
         logger.info("ActionLog.createComplaint.success");
     }
@@ -61,9 +61,9 @@ public class ComplaintServiceImpl implements ComplaintService {
         logger.info("ActionLog.updateComplaint.start");
         ComplaintEntity complaintEntity = ComplaintMapper.INSTANCE.dtoToEntity(complaintDTO);
         complaintEntity.setTypeId(complaintTypeRepository.findById(
-                complaintDTO.getTypeId()).orElseThrow(() -> new NotFoundException("Not found type")));
+                complaintDTO.getTypeId()).orElseThrow(() -> new NotFoundException("Type is not found")));
         complaintEntity.setStatusId(complaintStatusRepository.findById(
-                complaintDTO.getStatusId()).orElseThrow(() -> new NotFoundException("Not found status")));
+                complaintDTO.getStatusId()).orElseThrow(() -> new NotFoundException("Status is not found")));
         complaintRepository.save(complaintEntity);
         logger.info("ActionLog.updateComplaint.success");
     }

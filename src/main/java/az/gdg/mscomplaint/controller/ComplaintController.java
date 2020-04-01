@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/complaint")
@@ -23,11 +24,9 @@ public class ComplaintController {
 
     private static final Logger logger = LoggerFactory.getLogger(ComplaintController.class);
     private final ComplaintService complaintService;
-    private MessageChannel email;
 
-    public ComplaintController(ComplaintService complaintService, EmailChannel emailChannel) {
+    public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
-        email = emailChannel.emailOutput();
     }
 
     @ApiOperation("get all complaints")
@@ -39,7 +38,7 @@ public class ComplaintController {
 
     @ApiOperation("create complaint")
     @PostMapping
-    public void createComplaint(@RequestBody ComplaintRequest complaintRequest) {
+    public void createComplaint(@RequestBody @Valid ComplaintRequest complaintRequest) {
         logger.debug("Create complaint start");
         complaintService.createComplaint(complaintRequest);
         logger.debug("Create complaint end");
