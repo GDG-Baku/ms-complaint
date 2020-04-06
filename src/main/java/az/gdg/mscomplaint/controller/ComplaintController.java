@@ -20,6 +20,7 @@ import java.util.List;
 
 @RequestMapping("/complaint")
 @RestController
+
 public class ComplaintController {
 
     private static final Logger logger = LoggerFactory.getLogger(ComplaintController.class);
