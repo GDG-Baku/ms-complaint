@@ -1,6 +1,6 @@
 spring:
   rabbitmq:
-    addresses: amqp://sgehlykw:OFgFUW63DjUQo9mA7fpNIR-gw4wCACbp@crow.rmq.cloudamqp.com/sgehlykw
+    addresses: xxx
   cloud:
     stream:
       bindings:
