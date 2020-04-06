@@ -1,4 +1,12 @@
 spring:
+  rabbitmq:
+    addresses: amqp://sgehlykw:OFgFUW63DjUQo9mA7fpNIR-gw4wCACbp@crow.rmq.cloudamqp.com/sgehlykw
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: mail
+          group: mail-gorup
   datasource:
     username: root
     password: 123456789

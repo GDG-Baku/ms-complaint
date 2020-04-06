@@ -4,11 +4,13 @@ import az.gdg.mscomplaint.exception.NotFoundException;
 import az.gdg.mscomplaint.mapper.ComplaintMapper;
 import az.gdg.mscomplaint.model.ComplaintRequest;
 import az.gdg.mscomplaint.model.dto.ComplaintDTO;
+import az.gdg.mscomplaint.model.dto.MailDTO;
 import az.gdg.mscomplaint.repository.ComplaintRepository;
 import az.gdg.mscomplaint.repository.ComplaintStatusRepository;
 import az.gdg.mscomplaint.repository.ComplaintTypeRepository;
 import az.gdg.mscomplaint.repository.entity.ComplaintEntity;
 import az.gdg.mscomplaint.service.ComplaintService;
+import az.gdg.mscomplaint.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,13 +24,16 @@ public class ComplaintServiceImpl implements ComplaintService {
     private final ComplaintRepository complaintRepository;
     private final ComplaintTypeRepository complaintTypeRepository;
     private final ComplaintStatusRepository complaintStatusRepository;
+    private final MailService mailService;
 
     public ComplaintServiceImpl(ComplaintRepository complaintRepository,
                                 ComplaintTypeRepository complaintTypeRepository,
-                                ComplaintStatusRepository complaintStatusRepository) {
+                                ComplaintStatusRepository complaintStatusRepository,
+                                MailService mailService) {
         this.complaintRepository = complaintRepository;
         this.complaintTypeRepository = complaintTypeRepository;
         this.complaintStatusRepository = complaintStatusRepository;
+        this.mailService = mailService;
     }
 
     @Override
@@ -53,6 +58,17 @@ public class ComplaintServiceImpl implements ComplaintService {
         complaintEntity.setStatusId(complaintStatusRepository.findById(1).orElseThrow(()
                 -> new NotFoundException("Status is not found")));
         complaintRepository.save(complaintEntity);
+        String mailBody = "Complaint type: " + complaintEntity.getTypeId().getType() + "<br>" +
+                "Name: " + complaintEntity.getName() + "<br>" +
+                "Surname: " + complaintEntity.getSurname() + "<br>" +
+                "E-mail: " + complaintEntity.getEmail() + "<br>" +
+                "Phone: " + complaintEntity.getPhone() + "<br>" +
+                "Message: " + complaintEntity.getMessage();
+        MailDTO mailDTO = MailDTO.builder()
+                .mailTo("gdg.rubber.duck@gmail.com")
+                .mailSubject("Complaint mail #" + complaintEntity.getId())
+                .mailBody(mailBody).build();
+        mailService.sendToQueue(mailDTO);
         logger.info("ActionLog.createComplaint.success");
     }
 
