@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -65,7 +66,7 @@ public class ComplaintServiceImpl implements ComplaintService {
                 "Phone: " + complaintEntity.getPhone() + "<br>" +
                 "Message: " + complaintEntity.getMessage();
         MailDTO mailDTO = MailDTO.builder()
-                .mailTo("gdg.rubber.duck@gmail.com")
+                .mailTo(Collections.singletonList("gdg.rubber.duck@gmail.com"))
                 .mailSubject("Complaint mail #" + complaintEntity.getId())
                 .mailBody(mailBody).build();
         mailService.sendToQueue(mailDTO);
