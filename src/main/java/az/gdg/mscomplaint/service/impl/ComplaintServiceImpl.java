@@ -74,7 +74,7 @@ public class ComplaintServiceImpl implements ComplaintService {
         MailDTO mailDtoForCustomer = MailDTO.builder()
                 .mailTo(Collections.singletonList(complaintEntity.getEmail()))
                 .mailSubject("Your Complaint has accepted")
-                .mailBody("Your Complaint has accepted." +
+                .mailBody("Your Complaint has been accepted." +
                         "We'll deal with it as soon as possible")
                 .build();
         mailService.sendToQueue(mailDtoForCustomer);
