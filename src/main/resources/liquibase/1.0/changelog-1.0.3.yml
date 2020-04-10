@@ -8,20 +8,17 @@ databaseChangeLog:
             tableName: complaint_type
             columns:
               - column:
-                  id: 1
                   name: type
                   value: "TEKLIF"
         - insert:
             tableName: complaint_type
             columns:
               - column:
-                  id: 2
                   name: type
                   value: "SHIKAYET"
         - insert:
             tableName: complaint_type
             columns:
               - column:
-                  id: 3
                   name: type
                   value: "SORGU"

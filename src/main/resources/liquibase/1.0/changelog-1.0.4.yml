@@ -8,20 +8,17 @@ databaseChangeLog:
             tableName: complaint_status
             columns:
               - column:
-                  id: 1
                   name: status
                   value: "QEBUL OLUNDU"
         - insert:
             tableName: complaint_status
             columns:
               - column:
-                  id: 2
                   name: status
                   value: "BAXILIR"
         - insert:
             tableName: complaint_status
             columns:
               - column:
-                  id: 3
                   name: status
                   value: "HELL OLUNDU"
