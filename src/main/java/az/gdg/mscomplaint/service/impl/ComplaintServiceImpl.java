@@ -47,17 +47,17 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public void createComplaint(ComplaintRequest complaintRequest) {
         logger.info("ActionLog.createComplaint.start");
-        ComplaintEntity complaintEntity = new ComplaintEntity();
-
-        complaintEntity.setTypeId(complaintTypeRepository.findById(
-                complaintRequest.getTypeId()).orElseThrow(() -> new NotFoundException("Type is not found")));
-        complaintEntity.setName(complaintRequest.getName());
-        complaintEntity.setSurname(complaintRequest.getSurname());
-        complaintEntity.setEmail(complaintRequest.getEmail());
-        complaintEntity.setPhone(complaintRequest.getPhone());
-        complaintEntity.setMessage(complaintRequest.getMessage());
-        complaintEntity.setStatusId(complaintStatusRepository.findById(1).orElseThrow(()
-                -> new NotFoundException("Status is not found")));
+        ComplaintEntity complaintEntity = ComplaintEntity.builder()
+                .typeId(complaintTypeRepository.findById(
+                        complaintRequest.getTypeId()).orElseThrow(() -> new NotFoundException("Type is not found")))
+                .name(complaintRequest.getName())
+                .surname(complaintRequest.getSurname())
+                .email(complaintRequest.getEmail())
+                .phone(complaintRequest.getPhone())
+                .message(complaintRequest.getMessage())
+                .statusId(complaintStatusRepository.findById(1).orElseThrow(()
+                        -> new NotFoundException("Status is not found")))
+                .build();
         complaintRepository.save(complaintEntity);
         String mailBody = "Complaint type: " + complaintEntity.getTypeId().getType() + "<br>" +
                 "Name: " + complaintEntity.getName() + "<br>" +

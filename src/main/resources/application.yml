@@ -1,12 +1,12 @@
 spring:
-  rabbitmq:
-    addresses: xxx
-  cloud:
-    stream:
-      bindings:
-        output:
-          destination: mail
-          group: mail-gorup
+  #  rabbitmq:
+  #    addresses: xxx
+  #  cloud:
+  #    stream:
+  #      bindings:
+  #        output:
+  #          destination: mail
+  #          group: mail-gorup
   datasource:
     username: root
     password: 123456789
