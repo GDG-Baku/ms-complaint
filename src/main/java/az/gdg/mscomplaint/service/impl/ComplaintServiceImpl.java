@@ -66,15 +66,15 @@ public class ComplaintServiceImpl implements ComplaintService {
                 "Phone: " + complaintEntity.getPhone() + "<br>" +
                 "Message: " + complaintEntity.getMessage();
         MailDTO mailDTO = MailDTO.builder()
-                .mailTo(Collections.singletonList("gdg.rubber.duck@gmail.com"))
-                .mailSubject("Complaint mail #" + complaintEntity.getId())
-                .mailBody(mailBody).build();
+                .to(Collections.singletonList("gdg.rubber.duck@gmail.com"))
+                .subject("Complaint mail #" + complaintEntity.getId())
+                .body(mailBody).build();
         mailService.sendToQueue(mailDTO);
 
         MailDTO mailDtoForCustomer = MailDTO.builder()
-                .mailTo(Collections.singletonList(complaintEntity.getEmail()))
-                .mailSubject("Your Complaint has accepted")
-                .mailBody("Your Complaint has been accepted." +
+                .to(Collections.singletonList(complaintEntity.getEmail()))
+                .subject("Your Complaint has accepted")
+                .body("Your Complaint has been accepted." +
                         "We'll deal with it as soon as possible")
                 .build();
         mailService.sendToQueue(mailDtoForCustomer);
