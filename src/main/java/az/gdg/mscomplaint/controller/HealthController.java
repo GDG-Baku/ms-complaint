@@ -14,10 +14,10 @@ public class HealthController {
     private static final Logger logger = LoggerFactory.getLogger(HealthController.class);
 
 
-    @ApiOperation(value = "Method will be called by ms-alarm")
+    @ApiOperation(value = "Method will be called by ms-complaint")
     @CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
     @GetMapping
     public void health() {
-        logger.info("ActionLog.ms-article.start");
+        logger.info("ActionLog.ms-complaint.start");
     }
 }
