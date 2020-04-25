@@ -1,6 +1,8 @@
 package az.gdg.mscomplaint.service.impl;
 
+import az.gdg.mscomplaint.exception.NoAccessException;
 import az.gdg.mscomplaint.exception.NotFoundException;
+import az.gdg.mscomplaint.exception.NotValidTokenException;
 import az.gdg.mscomplaint.mapper.ComplaintMapper;
 import az.gdg.mscomplaint.model.ComplaintRequest;
 import az.gdg.mscomplaint.model.dto.ComplaintDTO;
@@ -13,6 +15,8 @@ import az.gdg.mscomplaint.service.ComplaintService;
 import az.gdg.mscomplaint.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -26,6 +30,7 @@ public class ComplaintServiceImpl implements ComplaintService {
     private final ComplaintTypeRepository complaintTypeRepository;
     private final ComplaintStatusRepository complaintStatusRepository;
     private final MailService mailService;
+    private final String ROLE = "ROLE_ADMIN";
 
     public ComplaintServiceImpl(ComplaintRepository complaintRepository,
                                 ComplaintTypeRepository complaintTypeRepository,
@@ -40,8 +45,15 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public List<ComplaintDTO> getAllComplaints() {
         logger.info("ActionLog.getAllComplaints.start");
-        List<ComplaintEntity> complaints = complaintRepository.findAll();
-        return ComplaintMapper.INSTANCE.entityListToDtoList(complaints);
+        String role = getAuthenticatedObject().getPrincipal().toString();
+
+        if (role.equals(ROLE)) {
+            List<ComplaintEntity> complaints = complaintRepository.findAll();
+
+            return ComplaintMapper.INSTANCE.entityListToDtoList(complaints);
+        } else {
+            throw new NoAccessException("Regular users can't get complaints");
+        }
     }
 
     @Override
@@ -84,19 +96,38 @@ public class ComplaintServiceImpl implements ComplaintService {
     @Override
     public void updateComplaint(ComplaintDTO complaintDTO) {
         logger.info("ActionLog.updateComplaint.start");
-        ComplaintEntity complaintEntity = ComplaintMapper.INSTANCE.dtoToEntity(complaintDTO);
-        complaintEntity.setTypeId(complaintTypeRepository.findById(
-                complaintDTO.getTypeId()).orElseThrow(() -> new NotFoundException("Type is not found")));
-        complaintEntity.setStatusId(complaintStatusRepository.findById(
-                complaintDTO.getStatusId()).orElseThrow(() -> new NotFoundException("Status is not found")));
-        complaintRepository.save(complaintEntity);
+        String role = getAuthenticatedObject().getPrincipal().toString();
+
+        if (role.equals(ROLE)) {
+            ComplaintEntity complaintEntity = ComplaintMapper.INSTANCE.dtoToEntity(complaintDTO);
+            complaintEntity.setTypeId(complaintTypeRepository.findById(
+                    complaintDTO.getTypeId()).orElseThrow(() -> new NotFoundException("Type is not found")));
+            complaintEntity.setStatusId(complaintStatusRepository.findById(
+                    complaintDTO.getStatusId()).orElseThrow(() -> new NotFoundException("Status is not found")));
+            complaintRepository.save(complaintEntity);
+        } else {
+            throw new NoAccessException("Regular users can't update complaints");
+        }
         logger.info("ActionLog.updateComplaint.success");
     }
 
     @Override
     public void deleteComplaint(int id) {
         logger.info("ActionLog.deleteComplaint.start");
-        complaintRepository.deleteById(id);
-        logger.info("ActionLog.deleteComplaint.end");
+        String role = getAuthenticatedObject().getPrincipal().toString();
+
+        if (role.equals(ROLE)) {
+            complaintRepository.deleteById(id);
+            logger.info("ActionLog.deleteComplaint.end");
+        } else {
+            throw new NoAccessException("Regular users can't delete complaints");
+        }
+    }
+
+    private Authentication getAuthenticatedObject() {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            throw new NotValidTokenException("Token is not valid or it is expired");
+        }
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }

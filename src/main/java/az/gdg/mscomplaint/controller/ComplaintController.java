@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +33,9 @@ public class ComplaintController {
 
     @ApiOperation("get all complaints")
     @GetMapping
-    public List<ComplaintDTO> getAllComplaints() {
+    public List<ComplaintDTO> getAllComplaints(
+            @RequestHeader("X-Auth-Token") String token
+    ) {
         logger.debug("Get all complaints");
         return complaintService.getAllComplaints();
     }
@@ -47,7 +50,8 @@ public class ComplaintController {
 
     @ApiOperation("update complaint")
     @PutMapping
-    public void updateComplaint(@RequestBody ComplaintDTO complaintDTO) {
+    public void updateComplaint(@RequestHeader("X-Auth-Token") String token,
+                                @RequestBody ComplaintDTO complaintDTO) {
         logger.debug("Update complaint start");
         complaintService.updateComplaint(complaintDTO);
         logger.debug("Update complaint end");
@@ -55,7 +59,8 @@ public class ComplaintController {
 
     @ApiOperation("delete complaint by id")
     @DeleteMapping("/{id}")
-    public void deleteComplaint(@PathVariable("id") int id) {
+    public void deleteComplaint(@RequestHeader("X-Auth-Token") String token,
+                                @PathVariable("id") int id) {
         logger.debug("Delete complaint of complaintId {} start", id);
         complaintService.deleteComplaint(id);
         logger.debug("Delete complaint of complaintId {} start", id);

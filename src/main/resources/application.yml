@@ -23,3 +23,6 @@ spring:
   liquibase:
     change-log: classpath:liquibase/changelog-master.yml
     enabled: true
+service:
+  ms-auth:
+    url: http://gdg-ms-auth.herokuapp.com
