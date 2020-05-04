@@ -21,7 +21,7 @@ import java.util.List;
 
 @RequestMapping("/complaint")
 @RestController
-
+@CrossOrigin(exposedHeaders = "Access-Control-Allow-Origin")
 public class ComplaintController {
 
     private static final Logger logger = LoggerFactory.getLogger(ComplaintController.class);
