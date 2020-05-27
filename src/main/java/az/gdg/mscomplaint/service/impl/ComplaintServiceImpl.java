@@ -30,7 +30,7 @@ public class ComplaintServiceImpl implements ComplaintService {
     private final ComplaintTypeRepository complaintTypeRepository;
     private final ComplaintStatusRepository complaintStatusRepository;
     private final MailService mailService;
-    private final String ROLE = "ROLE_ADMIN";
+    private static final String ROLE = "ROLE_ADMIN";
 
     public ComplaintServiceImpl(ComplaintRepository complaintRepository,
                                 ComplaintTypeRepository complaintTypeRepository,

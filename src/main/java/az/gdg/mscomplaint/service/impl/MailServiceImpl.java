@@ -1,6 +1,5 @@
 package az.gdg.mscomplaint.service.impl;
 
-
 import az.gdg.mscomplaint.model.dto.MailDTO;
 import az.gdg.mscomplaint.service.MailService;
 import lombok.AllArgsConstructor;

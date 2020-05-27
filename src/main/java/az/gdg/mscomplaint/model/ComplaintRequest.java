@@ -1,6 +1,5 @@
 package az.gdg.mscomplaint.model;
 
-
 import az.gdg.mscomplaint.validation.complaint.ComplaintConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

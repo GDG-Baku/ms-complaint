@@ -5,6 +5,7 @@ plugins {
 }
 
 apply plugin: "groovy"
+apply plugin: 'checkstyle'
 
 group = 'az.gdg'
 version = '0.0.1-SNAPSHOT'
@@ -14,6 +15,10 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+}
+
+checkstyle {
+	toolVersion '8.14'
 }
 
 repositories {
