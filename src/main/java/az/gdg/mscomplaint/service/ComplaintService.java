@@ -13,6 +13,4 @@ public interface ComplaintService {
 
     void updateComplaint(ComplaintDTO complaintDTO);
 
-    void deleteComplaint(int id);
-
 }

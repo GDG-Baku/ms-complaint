@@ -1,8 +1,8 @@
 package az.gdg.mscomplaint.service.impl;
 
-import az.gdg.mscomplaint.exception.NoAccessException;
 import az.gdg.mscomplaint.exception.NotFoundException;
 import az.gdg.mscomplaint.exception.NotValidTokenException;
+import az.gdg.mscomplaint.exception.UnauthorizedAccessException;
 import az.gdg.mscomplaint.mapper.ComplaintMapper;
 import az.gdg.mscomplaint.model.ComplaintRequest;
 import az.gdg.mscomplaint.model.dto.ComplaintDTO;
@@ -52,7 +52,7 @@ public class ComplaintServiceImpl implements ComplaintService {
 
             return ComplaintMapper.INSTANCE.entityListToDtoList(complaints);
         } else {
-            throw new NoAccessException("Regular users can't get complaints");
+            throw new UnauthorizedAccessException("Regular users can't get complaints");
         }
     }
 
@@ -106,23 +106,11 @@ public class ComplaintServiceImpl implements ComplaintService {
                     complaintDTO.getStatusId()).orElseThrow(() -> new NotFoundException("Status is not found")));
             complaintRepository.save(complaintEntity);
         } else {
-            throw new NoAccessException("Regular users can't update complaints");
+            throw new UnauthorizedAccessException("Regular users can't update complaints");
         }
         logger.info("ActionLog.updateComplaint.success");
     }
 
-    @Override
-    public void deleteComplaint(int id) {
-        logger.info("ActionLog.deleteComplaint.start");
-        String role = getAuthenticatedObject().getPrincipal().toString();
-
-        if (role.equals(ROLE)) {
-            complaintRepository.deleteById(id);
-            logger.info("ActionLog.deleteComplaint.end");
-        } else {
-            throw new NoAccessException("Regular users can't delete complaints");
-        }
-    }
 
     private Authentication getAuthenticatedObject() {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {

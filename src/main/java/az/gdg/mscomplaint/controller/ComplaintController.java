@@ -7,9 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,12 +56,4 @@ public class ComplaintController {
         logger.debug("Update complaint end");
     }
 
-    @ApiOperation("delete complaint by id")
-    @DeleteMapping("/{id}")
-    public void deleteComplaint(@RequestHeader("X-Auth-Token") String token,
-                                @PathVariable("id") int id) {
-        logger.debug("Delete complaint of complaintId {} start", id);
-        complaintService.deleteComplaint(id);
-        logger.debug("Delete complaint of complaintId {} start", id);
-    }
 }
