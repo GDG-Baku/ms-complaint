@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ComplaintConstraint
 public class ComplaintRequest {
-    private Integer typeId;
+    private Long typeId;
     private String name;
     private String surname;
     private String email;

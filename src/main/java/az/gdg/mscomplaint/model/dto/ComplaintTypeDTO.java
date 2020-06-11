@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ComplaintTypeDTO {
-    private Integer id;
+    private Long id;
     private String type;
 }

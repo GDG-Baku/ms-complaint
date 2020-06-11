@@ -67,7 +67,7 @@ public class ComplaintServiceImpl implements ComplaintService {
                 .email(complaintRequest.getEmail())
                 .phone(complaintRequest.getPhone())
                 .message(complaintRequest.getMessage())
-                .statusId(complaintStatusRepository.findById(1).orElseThrow(()
+                .statusId(complaintStatusRepository.findById(1L).orElseThrow(()
                         -> new NotFoundException("Status is not found")))
                 .build();
         complaintRepository.save(complaintEntity);

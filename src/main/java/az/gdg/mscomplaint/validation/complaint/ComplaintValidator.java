@@ -61,7 +61,7 @@ public class ComplaintValidator implements
         return true;
     }
 
-    private boolean isTypeId(Integer typeId, ConstraintValidatorContext context) {
+    private boolean isTypeId(Long typeId, ConstraintValidatorContext context) {
         if (typeId == null) {
             checkViolationHelper.addViolation(context, "typeId", "Type cannot be null");
             return false;

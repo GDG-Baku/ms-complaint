@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ComplaintStatusRepository extends CrudRepository<ComplaintStatusEntity, Integer> {
+public interface ComplaintStatusRepository extends CrudRepository<ComplaintStatusEntity, Long> {
 
 }
 

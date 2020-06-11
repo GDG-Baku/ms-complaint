@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ComplaintDTO {
-    private Integer id;
-    private int typeId;
+    private Long id;
+    private Long typeId;
     private String name;
     private String surname;
     private String email;
     private String phone;
     private String message;
-    private int statusId;
+    private Long statusId;
 }
