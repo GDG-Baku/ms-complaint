@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - logicalFilePath: liquibase/1.0/changelog-1.0.4.yml
+  - changeSet:
+      id: insert to complaint_type
+      author: Ali Huseynov
+      changes:
+        - insert:
+            tableName: complaint_type
+            columns:
+              - column:
+                  name: type
+                  value: "TEKLIF"
+        - insert:
+            tableName: complaint_type
+            columns:
+              - column:
+                  name: type
+                  value: "SHIKAYET"
+        - insert:
+            tableName: complaint_type
+            columns:
+              - column:
+                  name: type
+                  value: "SORGU"

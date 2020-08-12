@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - logicalFilePath: liquibase/1.0/changelog-1.0.4.yml
+  - changeSet:
+      id: insert to complaint_status
+      author: Ali Huseynov
+      changes:
+        - insert:
+            tableName: complaint_status
+            columns:
+              - column:
+                  name: status
+                  value: "QEBUL OLUNDU"
+        - insert:
+            tableName: complaint_status
+            columns:
+              - column:
+                  name: status
+                  value: "BAXILIR"
+        - insert:
+            tableName: complaint_status
+            columns:
+              - column:
+                  name: status
+                  value: "HELL OLUNDU"

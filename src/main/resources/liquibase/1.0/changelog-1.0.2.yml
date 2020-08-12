@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - logicalFilePath: liquibase/1.0/changelog-1.0.2.yml
+  - changeSet:
+      id: created complaints table
+      author: Ali Huseynov
+      changes:
+        - createTable:
+            tableName: complaints
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type_id
+                  type: serial
+                  constraints:
+                    foreignKeyName: type_id
+                    references: complaint_type(id)
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(254)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(30)
+              - column:
+                  name: message
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status_id
+                  type: serial
+                  constraints:
+                    foreignKeyName: status_id
+                    references: complaint_status(id)
+                    nullable: false
+              - column:
+                  name: comment
+                  type: varchar(150)
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
